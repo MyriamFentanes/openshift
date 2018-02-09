@@ -1,0 +1,12 @@
+---
+- hosts: custom_vms
+  remote_user: root
+
+- hosts: openshift
+  remote_user: root
+  serial: 1
+  roles:
+    - rhsm
+    
+
+

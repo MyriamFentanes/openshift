@@ -16,3 +16,11 @@
   remote_user: root
   roles:
     - setup_ocp_prereq
+
+- hosts: openshift
+  remote_user: root
+  serial: 1
+  roles:
+    - rhsm_uninstall
+
+
