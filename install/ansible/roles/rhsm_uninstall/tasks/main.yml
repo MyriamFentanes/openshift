@@ -1,0 +1,10 @@
+---
+- name: Unregister with Satellite
+  command: subscription-manager unregister
+
+- name: Delete rpm katello packages
+  command: rpm -e katello-ca-consumer-labsat.opentlc.com
+
+- name: Clean repos
+  command: subscription-manager clean
+~                                       

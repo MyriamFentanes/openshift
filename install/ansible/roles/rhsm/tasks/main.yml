@@ -1,20 +1,19 @@
----
-#- name: Subscribe to RHSM
+me: Subscribe to RHSM
 #  command: 'subscription-manager register --username {{ rhsm_user }} --password {{ rhsm_password }} --force'
-  
+
 #- name: Attach to pool
 #  command: 'subscription-manager attach --pool={{ rhsm_pool_id }}'
 
-# Stopped using this because it was slow and unreliable  
+# Stopped using this because it was slow and unreliable
 - name: Red Hat Subscription Management configuration
-  redhat_subscription: 
-    state: present
-    pool: "Employee"
-    username: "{{ rhsm_user }}"
-    password: "{{ rhsm_password }}"
+  command: rpm -Uvh http://labsat.opentlc.com/pub/katello-ca-consumer-latest.noarch.rpm
+
+- name: Register with Satellite
+  command: subscription-manager register --org="Red_Hat_GPTE_Labs"  --activationkey="6ac2c006fe614e1799e4fede16d1bd46"
 
 - name: subscription disable repos
   command: subscription-manager repos --disable='*'
-       
+
 - name: subscription enable repos
   command: subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-ose-3.6-rpms --enable="rhel-7-fast-datapath-rpms" --enable="rh-gluster-3-for-rhel-7-server-rpms"
+~                              
